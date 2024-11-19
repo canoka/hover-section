@@ -22,17 +22,6 @@ This project demonstrates a dynamic hover effect that changes the displayed imag
 
 3. Open the `index.html` file in your browser.
 
-## Visual Overview
-
-### Default View
-![Default View](/path/to/default-image.png)
-
-### Hover Example
-When hovering over a button, the image dynamically changes:
-
-#### On Hover:
-![Hover Example](/path/to/hover-image.png)
-
 ## Contributing
 
 If you'd like to contribute to this project:
