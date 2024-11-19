@@ -1,0 +1,195 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='copyright' content='Aven Creative'>
+    <meta name='author' content='https://github.com/canoka'>
+    <meta name='designer' content='canoka'>
+    <meta name='owner' content='canoka'>
+    <meta name='directory' content='submission'>
+    <meta name='category' content='css,js'>
+    <meta name='coverage' content='Worldwide'>
+    <meta name='distribution' content='Global'>
+    <meta name='HandheldFriendly' content='True'>
+    <meta name='MobileOptimized' content='320'>
+    <meta http-equiv='Expires' content='0'>
+    <meta http-equiv='Pragma' content='no-cache'>
+    <meta http-equiv='Cache-Control' content='no-cache'>
+    <meta http-equiv='imagetoolbar' content='no'>
+    <meta http-equiv='x-dns-prefetch-control' content='off'>
+
+    <title>Section Hover</title>
+    <style>
+        body{
+            font-family: Arial;
+        }
+        .custom-container {
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0px;
+        }
+
+        .custom-tabs {
+            flex: 1;
+            overflow: hidden;
+            width: 30%;
+            order: 2; /* Tabs kısmını sağ tarafa taşır */
+        }
+
+        .custom-tab {
+            margin-left:50px;
+            cursor: pointer;
+            padding-left: 15px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: transparent;
+            margin-bottom: 10px;
+            border-radius: 25px;
+            border: solid 1px #EBEBEB;
+            transition: background-color 0.5s ease;
+        }
+
+        .custom-tab:hover,
+        .custom-tab.active {
+            background-color: #f5f5f5;
+            transition: background-color 0.5s ease;
+        }
+
+        .custom-tab-title {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 22px;
+            color: #9373db;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+
+        .custom-tab:hover .custom-tab-title,
+        .custom-tab.active .custom-tab-title {
+            color: purple;
+        }
+
+        .custom-tab-content {
+            padding-left: 50px;
+            box-sizing: border-box;
+            display: none;
+            opacity: 0;
+        }
+
+        .custom-images {
+            flex: 2;
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            order: 1; /* Images kısmını sol tarafa taşır */
+        }
+
+        .custom-image {
+            max-width: 900px;
+            height: 574px;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out; /* Fade-out transition */
+            border-radius: 25px;
+        }
+
+        .custom-image-mobile {
+            width: -webkit-fill-available;
+        }
+
+        .custom-text-icon-before {
+            width: 30px;
+            height: 30px;
+            justify-content: center;
+            float: left;
+            align-content: center;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .custom-tab-content,
+            .custom-image {
+                display: none;
+            }
+
+            .custom-tab-content:first-child,
+            .custom-image:first-child {
+                display: block;
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="custom-container">
+            <div class="custom-images">
+                <div class="custom-tab-content" style="opacity: 1; display: block;">
+                    <img decoding="async" class="custom-image" src="image_1.jpg" style="opacity: 1; display: block;">
+                </div>
+                <div class="custom-tab-content" style="opacity: 0; display: none;">
+                    <img decoding="async" class="custom-image" src="image_2.webp" style="opacity: 0; display: none;">
+                </div>
+            </div>
+            <div class="custom-tabs">
+                <div class="custom-tab active" onmouseenter="showCustomTab(0)">
+                    <div class="custom-tab-title" style="color: mediumpurple;">
+                        <img class="custom-text-icon-before" alt="Text Icon" src="https://www.dialxl.com/wp-content/uploads/2024/11/arayuztasarimi.png">First Image
+                    </div>
+                </div>
+                <div class="custom-tab" onmouseenter="showCustomTab(1)">
+                    <div class="custom-tab-title" style="color: rgb(12, 12, 12);">
+                        <img class="custom-text-icon-before" alt="Text Icon" src="https://www.dialxl.com/wp-content/uploads/2024/11/chatbot.png">Second Image
+                    </div>
+                </div>
+                <!-- Diğer tablar buraya gelir -->
+            </div>
+        </div>
+        <script>
+            const customTabs = document.querySelectorAll('.custom-tab');
+            const customTabContents = document.querySelectorAll('.custom-tab-content');
+            const customImages = document.querySelectorAll('.custom-image');
+
+            customTabs.forEach((tab, index) => {
+                tab.addEventListener('mouseenter', () => showCustomTab(index));
+            });
+
+            function showCustomTab(index) {
+                customTabContents.forEach(customTabContent => {
+                    customTabContent.style.opacity = 0;
+                    customTabContent.style.display = 'none';
+                });
+
+                customImages.forEach(customImage => {
+                    customImage.style.opacity = 0;
+                    customImage.style.display = 'none';
+                });
+
+                customTabs.forEach(customTab => {
+                    customTab.classList.remove('active');
+                    customTab.querySelector('.custom-tab-title').style.color = 'black';
+                });
+
+                customTabContents[index].style.display = 'block';
+                customImages[index].style.display = 'block';
+
+                setTimeout(() => {
+                    customTabContents[index].style.opacity = 1;
+                    customImages[index].style.opacity = 1;
+                }, 50);
+
+                customTabs[index].classList.add('active');
+                customTabs[index].querySelector('.custom-tab-title').style.color = '#9373db';
+            }
+
+            showCustomTab(0);
+        </script>
+    </section>
+</body>
+</html>
